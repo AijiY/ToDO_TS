@@ -1,0 +1,25 @@
+.new-todo {
+  display: flex;
+}
+
+.new-todo > div {
+  margin-left: 20px;
+}
+
+.todo-list {
+  border-collapse: collapse;
+}
+.todo-list > thead {
+  background-color: rgb(179, 179, 179);
+}
+
+.todo-list > thead > tr > th,
+.todo-list > tbody > tr > td {
+  width: 150px;
+  border: 1px solid;
+  padding: 10px;
+}
+
+.filter {
+  margin: 10px 0;
+}
