@@ -1,13 +1,14 @@
-let todoList = [];
-
-let filterWord = "";
+export const data = {
+  todoList: [],
+  filterWord: "",
+}
 
 // 入力された新しいTODOの値を取得し、todoList変数に代入する関数
-const registerNewTodo = () => {
+export const registerNewTodo = () => {
   const newTodoName = document.getElementById("new-todo-name");
   const newPerson = document.getElementById("new-person");
   const newDeadline = document.getElementById("new-deadline");
-  todoList.push({
+  data.todoList.push({
     id: Date.now(),
     todoName: newTodoName.value,
     person: newPerson.value,
@@ -25,17 +26,17 @@ const removeTodoListElem = () => {
 
 // 引数にidを受け取り、todoListの中から該当するtodoを削除する関数
 const removeTodoById = (id) =>
-  (todoList = todoList.filter((todo) => todo.id !== id));
+  (data.todoList = data.todoList.filter((todo) => todo.id !== id));
 
 // TODO一覧を表示する関数
-const appendTodoListElem = () => {
+export const appendTodoListElem = () => {
   // TODO一覧を全て削除
   removeTodoListElem();
 
-  todoList
+  data.todoList
     .filter(
       (todo) =>
-        todo.todoName.includes(filterWord) || todo.person.includes(filterWord)
+        todo.todoName.includes(data.filterWord) || todo.person.includes(data.filterWord)
     )
     .forEach((todo) => {
       // todoNameのtd要素を生成
@@ -73,20 +74,3 @@ const appendTodoListElem = () => {
       tbodyElem.appendChild(trElem);
     });
 };
-
-document.addEventListener("DOMContentLoaded", () => {
-  const registerButtonElem = document.getElementById("register");
-  registerButtonElem.addEventListener("click", () => {
-    // 入力されたTODOの値を取得しtodoList変数に代入
-    registerNewTodo();
-    // TODO一覧を表示
-    appendTodoListElem();
-  });
-
-  // 絞り込みに入力された場合のイベント定義
-  const filterInputElem = document.getElementById("filter");
-  filterInputElem.addEventListener("input", () => {
-    filterWord = filterInputElem.value;
-    appendTodoListElem();
-  });
-});
